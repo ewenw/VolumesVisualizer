@@ -27,7 +27,6 @@ public class Main extends PApplet {
 		surface.setResizable(true);
 		surface.setTitle("Visualizer");
 		reset();
-		//scrollBar = new HScrollbar(width/2-400, height-8, 400, 16, 1);
 	}
 	
 	public void reset() {
@@ -47,16 +46,12 @@ public class Main extends PApplet {
 		if(camZ>600)camZ=600;
 		if(interval<10)interval = 10;
 		canDraw++;
-		//if(display)camera(0, 0, camZ, 0, 0, 0, 0, 1, 0);
-		//else camera();
 		strokeWeight(4);
 		int camX = (mouseX+oldX)/2, camY = (mouseY+oldY)/2;
 		if (mousePressed && !display&&canDraw>10 && (camX!=oldX || camY!=oldY))
 		{
 			stroke(0);
-
 			line(camX,camY, oldX, oldY);
-			//shape.add(new PVector(oldX, oldY));
 			shape.add(new PVector(camX, camY));
 
 		}
@@ -66,7 +61,6 @@ public class Main extends PApplet {
 			{
 				anchorx = mouseX;
 				anchory = mouseY;
-
 			}
 			rotx = (mouseX - anchorx)/5;
 			roty = (mouseY - anchory)/5;
@@ -114,7 +108,6 @@ public class Main extends PApplet {
 			renderModel();
 			colorMode(RGB);
 			popMatrix();
-
 			//cam.beginHUD();
 			textSize(20);
 			fill(0, 102, 153);
@@ -274,26 +267,16 @@ public class Main extends PApplet {
 		int dY = 10;
 		int index=0;
 
-		for(float i=dup.get(0).y+dY;i<dup.get(dup.size()-1).y;i+=dY){
-
+		for(float i = dup.get(0).y + dY; i < dup.get(dup.size()-1).y; i+=dY){
 			ArrayList<Float> xValues = new ArrayList<Float>();
-
-			for(int j= index; dup.get(j).y<i;j++){
+			for(int j= index; dup.get(j).y<i;j++)
 				xValues.add(dup.get(j).x);
-				//if(dup.get(j).y>maxY) maxY = dup.get(j).y;
-				//if(dup.get(j).y<minY) minY = dup.get(j).y;   
-			}
 			Collections.sort(xValues, new CompareFloat());
-
 			float maxX = xValues.get(xValues.size()-1), minX= xValues.get(0);
 			float maxX2 = xValues.get(xValues.size()-2), minX2 = xValues.get(1);
-
-
 			float volume = getCylindricalVolume(i-dY, i,(maxX+maxX2)/2, (minX+minX2)/2);
 			println(i-dY + " " + i+ " " +minX+ " " + minX2 + " " + maxX + " " + maxX2 +" "+ volume);
-
 			totalVolume += volume;
-
 		}
 		println("Volume Estimate: " + totalVolume);
 	}
@@ -301,7 +284,8 @@ public class Main extends PApplet {
 	public void mathYRot(){
 		float totalVolume = 0;
 		ArrayList<PVector> dup = new ArrayList<PVector>();
-		for(PVector d:shape) dup.add(new PVector(d.x-width/2,height/2-d.y));
+		for(PVector d:shape) 
+			dup.add(new PVector(d.x-width/2,height/2-d.y));
 		Collections.sort(dup, new CompareYRot());
 		for(PVector ve:dup)
 			println(ve);
