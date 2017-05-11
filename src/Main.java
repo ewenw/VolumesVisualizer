@@ -7,7 +7,6 @@ import processing.core.*;
 import processing.event.*; 
 import java.util.Collections; 
 import java.util.Comparator; 
-
 import java.util.ArrayList; 
 
 public class Main extends PApplet {
